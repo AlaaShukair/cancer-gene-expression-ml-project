@@ -3,8 +3,13 @@
 ##  Project Overview
 
 This project uses machine learning techniques to classify cancer samples based on RNA-seq gene expression data. The workflow includes preprocessing, exploratory data analysis, feature selection, machine learning model comparison, hyperparameter tuning, and deployment using Streamlit.
+##  Project Links
 
----
+### GitHub Repository
+https://github.com/AlaaShukair/cancer-gene-expression-ml-project
+
+### Streamlit Prediction App
+https://cancer-gene-expression-ml-project-apubdjabrpuoqoy5kgzzyt.streamlit.app/
 
 ## Key Features
 
