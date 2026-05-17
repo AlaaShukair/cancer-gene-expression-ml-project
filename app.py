@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import joblib
@@ -21,9 +22,13 @@ st.info(
 # Get expected feature names
 expected_features = list(selector.feature_names_in_)
 
-uploaded_file = st.file_uploader("Upload gene expression CSV file", type=["csv"])
+uploaded_file = st.file_uploader(
+    "Upload gene expression CSV file",
+    type=["csv"]
+)
 
 if uploaded_file is not None:
+
     input_df = pd.read_csv(uploaded_file)
 
     st.subheader("Uploaded Data Preview")
@@ -33,14 +38,26 @@ if uploaded_file is not None:
     if "Id" in input_df.columns:
         input_df = input_df.drop(columns=["Id"])
 
-    # Check missing expected columns
-    missing_cols = [col for col in expected_features if col not in input_df.columns]
+    # Check missing columns
+    missing_cols = [
+        col for col in expected_features
+        if col not in input_df.columns
+    ]
 
     if len(missing_cols) > 0:
-        st.error("The uploaded file is missing some required gene columns.")
-        st.write("Example missing columns:", missing_cols[:10])
+
+        st.error(
+            "The uploaded file is missing some required gene columns."
+        )
+
+        st.write(
+            "Example missing columns:",
+            missing_cols[:10]
+        )
+
     else:
-        # Keep only required columns in correct order
+
+        # Arrange columns correctly
         input_df = input_df[expected_features]
 
         # Apply feature selection
@@ -51,7 +68,11 @@ if uploaded_file is not None:
 
         # Predict
         prediction = model.predict(scaled_input)
+
         predicted_class = label_encoder.inverse_transform(prediction)
 
         st.subheader("Prediction Result")
-        st.success(f"Predicted Cancer Class: {predicted_class[0]}")
+
+        st.success(
+            f"Predicted Cancer Class: {predicted_class[0]}"
+        )
