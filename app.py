@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -18,10 +17,13 @@ st.write(
 )
 
 st.info(
-    "Note: This app uses selected important genes from the full RNA-seq dataset for demonstration."
+    "This app uses selected important genes from the full RNA-seq dataset for demonstration."
 )
 
-# Create input fields
+# Get original feature names from the fitted selector
+all_feature_names = selector.feature_names_in_
+
+# User inputs
 input_values = {}
 
 for gene in selected_features:
@@ -31,29 +33,25 @@ for gene in selected_features:
         step=0.1
     )
 
-# Convert input into dataframe
-input_df = pd.DataFrame([input_values])
-
-# Create full feature dataframe with all genes expected by selector
-# Missing genes are filled with 0
-full_features = pd.DataFrame(
-    np.zeros((1, 14572)),
-    columns=[f"gene_{i}" for i in range(1, 14573)]
-)
-
-# Update selected gene values
-for gene in selected_features:
-    if gene in full_features.columns:
-        full_features[gene] = input_df[gene].values
-
-# Apply feature selection
-selected_input = selector.transform(full_features)
-
-# Scale input
-scaled_input = scaler.transform(selected_input)
-
-# Prediction
 if st.button("Predict Cancer Class"):
+
+    # Create full feature dataframe with correct original gene names
+    full_features = pd.DataFrame(
+        np.zeros((1, len(all_feature_names))),
+        columns=all_feature_names
+    )
+
+    # Add user-entered values
+    for gene in selected_features:
+        full_features.loc[0, gene] = input_values[gene]
+
+    # Apply feature selection
+    selected_input = selector.transform(full_features)
+
+    # Scale input
+    scaled_input = scaler.transform(selected_input)
+
+    # Predict
     prediction = model.predict(scaled_input)
     predicted_class = label_encoder.inverse_transform(prediction)
 
