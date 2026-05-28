@@ -11,6 +11,11 @@ https://github.com/AlaaShukair/cancer-gene-expression-ml-project
 ### Streamlit Prediction App
 https://cancer-gene-expression-ml-project-apubdjabrpuoqoy5kgzzyt.streamlit.app/
 
+###Dataset Source: Kaggle – Gene Expression Dataset for Cancer Classification. 
+ 
+RNA-Seq Gene Expression Datase Multi-Class cancer
+https://www.kaggle.com/datasets/udayraman/rna-seq-gene-expression-datase-multi-class-cancer 
+
 ## Key Features
 
 ✅ Bioinformatics and RNA-seq dataset  
