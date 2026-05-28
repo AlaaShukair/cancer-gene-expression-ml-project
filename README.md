@@ -49,6 +49,10 @@ Visualizations included:
 - Scatter plots
 - Correlation heatmaps
 - Class distribution plots
+  
+  ## Feature Engineering
+
+New statistical features were created, including mean gene expression and standard deviation, to capture additional patterns in the gene expression data.
 
 ### Feature Selection
 SelectKBest with ANOVA F-test was used to select the top 100 most informative genes.
